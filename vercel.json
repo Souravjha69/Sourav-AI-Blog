@@ -1,27 +1,20 @@
 {
-    "services": {
-          "frontend": {
-                  "root": "frontend",
-                  "framework": "create-react-app"
-          },
-          "backend": {
-                  "root": "backend"
-          }
-    },
-    "rewrites": [
-          {
-                  "source": "/api/(.*)?" ,
-                  "destination": {
-                            "type": "service",
-                            "service": "backend"
-                  }
-          },
-          {
-                  "source": "/(.*)",
-                  "destination": {
-                            "type": "service",
-                            "service": "frontend"
-                  }
-          }
-    ]
+      "buildCommand": "cd frontend && npm install && npm run build",
+      "outputDirectory": "frontend/build",
+      "installCommand": "cd frontend && npm install",
+      "functions": {
+              "backend/api/index.py": {
+                        "runtime": "python3.12"
+              }
+      },
+      "rewrites": [
+              {
+                        "source": "/api/(.*)",
+                        "destination": "/backend/api/index.py"
+              },
+              {
+                        "source": "/(.*)",
+                        "destination": "/index.html"
+              }
+      ]
 }
