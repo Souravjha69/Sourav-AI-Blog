@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#111111" />
+        <meta name="description" content="sourav.log — a tech and AI journal by Sourav Kumar Jha, Full Stack &amp; AI Developer. Long-form essays and field reports on the software, models, and systems shaping what comes next." />
+        <meta name="author" content="Sourav Kumar Jha" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23111111'/%3E%3Ctext x='50' y='68' font-size='58' font-family='Georgia,serif' font-weight='bold' fill='%23FAFAF8' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E" />
+        <title>sourav.log — Tech &amp; AI Journal</title>
+        <script>
+            // Browser extensions (React DevTools, etc.) sometimes throw while
+            // inspecting the page — that's not an app error, so keep it out
+            // of the dev error overlay instead of showing a false alarm.
+            window.addEventListener(
+                "error",
+                function (e) {
+                    if (e.filename && e.filename.indexOf("chrome-extension://") === 0) {
+                        e.stopImmediatePropagation();
+                        e.preventDefault();
+                    }
+                },
+                true
+            );
+        </script>
+    </head>
+    <body>
+        <noscript>You need to enable JavaScript to run this app.</noscript>
+        <div id="root"></div>
+    </body>
+</html>
