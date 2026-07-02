@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Tech",
+    "slug": "tech",
+    "description": "Deep dives into engineering, infra, and product."
+  },
+  {
+    "name": "AI",
+    "slug": "ai",
+    "description": "Research, models, and applied intelligence."
+  }
+]

@@ -1,0 +1,128 @@
+[
+  {
+    "id": "a4ae133e-7573-42bb-87c3-ca45c012f8a7",
+    "slug": "the-silent-rewrite-how-compilers-are-becoming-reasoning-engines",
+    "title": "The Silent Rewrite: How Compilers Are Becoming Reasoning Engines",
+    "excerpt": "The next generation of compilers isn't compiling \u2014 it's negotiating. A field report from inside the toolchain revolution.",
+    "content": "For decades, the compiler was a translator. It took your syntax, ran it through a deterministic pipeline, and produced instructions a machine could execute. Cold. Mechanical. Predictable.\n\nThat era is quietly ending.\n\nModern build systems now embed neural passes that inspect intent, not just tokens. When you ship code today, a graph of learned heuristics is deciding how your loops unroll, which allocations get elided, and \u2014 increasingly \u2014 whether your comment about 'safety' actually matches the branch you wrote.\n\n## From lexer to listener\n\nThe classic compiler front-end tokenizes and parses. A reasoning compiler reads your code the way a senior engineer reads a pull request. It builds a semantic model. It notices when you named a variable `retries` but only used it once. It flags the mismatch between your docstring and your control flow.\n\nThis isn't autocomplete. This is a peer.\n\n## The trust problem\n\nWhen the compiler is a reasoning engine, deterministic reproducibility becomes negotiable. Two builds of the same source can produce different binaries because the model behind the pass sampled differently. Teams are responding with 'build attestations' \u2014 cryptographic receipts of the reasoning trace that produced each artifact.\n\nWe are witnessing the birth of a new discipline. Call it compiler ethnography: the study of how these systems make decisions on our behalf, and how we hold them accountable when they're wrong.\n\n## What comes next\n\nExpect three shifts in the next 18 months: build systems that ship with policies rather than flags, IDEs that surface the compiler's chain-of-thought inline with your code, and a new class of security bug \u2014 the reasoning injection.\n\nThe compiler used to be a wall between us and the machine. It's becoming a mirror.",
+    "category": "Tech",
+    "tags": [
+      "compilers",
+      "systems",
+      "engineering"
+    ],
+    "cover_image": "https://images.pexels.com/photos/28767589/pexels-photo-28767589.jpeg",
+    "author_id": "a1",
+    "read_time": 8,
+    "likes": 42,
+    "comments": [],
+    "published": true,
+    "created_at": "2026-07-02T17:34:18.239169+00:00",
+    "updated_at": "2026-07-02T17:34:18.239147+00:00"
+  },
+  {
+    "id": "61e7c66a-1bd0-4b7c-88c2-29228837700b",
+    "slug": "small-models-loud-rooms-the-case-for-local-intelligence",
+    "title": "Small Models, Loud Rooms: The Case for Local Intelligence",
+    "excerpt": "The largest model doesn't win. The one closest to your data does. A quiet manifesto for edge-first AI.",
+    "content": "There is a particular kind of quiet you only find in a well-tuned local model. No spinner. No latency. No tab telling you a request is 'thinking'.\n\nJust an answer.\n\nWe spent three years chasing scale. Now the interesting frontier is in the other direction \u2014 models small enough to sit inside your editor, your terminal, your notes app, and never leave.\n\n## The context you already have\n\nThe most valuable context in your life is on your own disk. Your commits. Your calendar. Your half-written drafts. Sending that to a server, waiting, and receiving a stochastic paragraph back is an absurd dance. The model should come to the data.\n\n## What changes\n\nLatency becomes design. When your model responds in 40ms, you stop typing prompts and start typing intents. The interface flattens. The keyboard becomes the interface.\n\nPrivacy stops being a policy and becomes a property. Your notes never leave your machine because they never had to.\n\n## The trade\n\nYou lose the benchmark leaderboard. You gain a tool that respects you.\n\nThe next great AI product will not be the smartest. It will be the closest.",
+    "category": "AI",
+    "tags": [
+      "edge",
+      "llm",
+      "privacy"
+    ],
+    "cover_image": "https://images.pexels.com/photos/12198534/pexels-photo-12198534.jpeg",
+    "author_id": "a1",
+    "read_time": 6,
+    "likes": 59,
+    "comments": [],
+    "published": true,
+    "created_at": "2026-07-01T17:34:18.239896+00:00",
+    "updated_at": "2026-07-02T17:34:18.239890+00:00"
+  },
+  {
+    "id": "e9a11e09-eb89-4147-b2ec-5c54238ac380",
+    "slug": "agents-that-ship-a-field-manual-for-production-autonomy",
+    "title": "Agents That Ship: A Field Manual for Production Autonomy",
+    "excerpt": "Everyone has an agent demo. Almost no one has an agent in production. Here is what the gap actually looks like.",
+    "content": "The demo agent solves a puzzle. The production agent survives Monday morning.\n\nThe difference is not intelligence. It is infrastructure.\n\n## The three failure modes\n\nEvery agent I have watched die in production dies for one of three reasons: it forgot what it was doing, it did the same thing twice, or it made a decision no human could review.\n\nMemory, idempotency, auditability. Solve these three and you have a system. Ignore them and you have theater.\n\n## Memory is not a vector database\n\nThe most common mistake is treating memory as retrieval. Memory is state. State needs a schema. State needs migration. State needs a way to be wrong and get corrected.\n\nStart with a boring relational table. Add embeddings only when a human would need to search by meaning.\n\n## Idempotency is a design constraint\n\nAgents retry. Networks fail. Tools timeout. Every action your agent takes must be safe to repeat. If it sends an email, the email must have a deterministic ID. If it charges a card, the charge must have an idempotency key.\n\nThis is not exotic. Payment systems have done this for thirty years. Agents are just late to the party.\n\n## Ship the log, not the loop\n\nThe most important artifact your agent produces is not its output. It is its trace. Every decision, with the inputs it saw and the reasoning it emitted. Store it. Search it. Replay it.\n\nWhen your agent does something surprising in production, and it will, the trace is the difference between a five-minute rollback and a five-day investigation.\n\n## The boring truth\n\nProduction agents look a lot like production anything else. Queues. Retries. Idempotency. Logs. The magic is not in the model. The magic is in treating the model like the least reliable component in the system, and building around that assumption.",
+    "category": "AI",
+    "tags": [
+      "agents",
+      "production",
+      "engineering"
+    ],
+    "cover_image": "https://images.pexels.com/photos/4220817/pexels-photo-4220817.jpeg",
+    "author_id": "a1",
+    "read_time": 9,
+    "likes": 76,
+    "comments": [],
+    "published": true,
+    "created_at": "2026-06-30T17:34:18.240432+00:00",
+    "updated_at": "2026-07-02T17:34:18.240427+00:00"
+  },
+  {
+    "id": "13635787-5577-4d15-9b31-efea9cb05f2b",
+    "slug": "the-new-latency-why-milliseconds-matter-again",
+    "title": "The New Latency: Why Milliseconds Matter Again",
+    "excerpt": "For a decade, latency was solved. Then interfaces got smart, and every millisecond became a design decision.",
+    "content": "Latency used to be a networking problem. You measured it, you optimized it, you moved on.\n\nThen interfaces got smart. Now every interaction has a decision in the middle of it, and every decision costs time. Latency is back \u2014 but this time it is a design problem, not a networking one.\n\n## The 100ms rule, revisited\n\nJakob Nielsen wrote in 1993 that 100ms is the threshold at which an interface feels instant. That rule still holds. What changed is where the 100ms goes.\n\nIn 2015, you spent 20ms on a network round trip and 80ms on rendering. In 2026, you spend 10ms on the network, 40ms on rendering, and 50ms on inference. The interface still needs to feel instant. The budget is tighter.\n\n## The choreography of waiting\n\nWhen you cannot make something faster, you make waiting feel intentional. Skeleton states. Optimistic UI. Streaming tokens. Each of these is a way to convert waiting from an absence into a presence.\n\nThe best interfaces of the next few years will not be the fastest. They will be the ones that make you forget you are waiting.\n\n## Where to spend the budget\n\nCache aggressively. Predict likely next actions. Stream partials. But most of all: measure. The teams shipping the best latency are the teams with the best dashboards. You cannot design what you cannot see.",
+    "category": "Tech",
+    "tags": [
+      "performance",
+      "ux",
+      "design"
+    ],
+    "cover_image": "https://images.pexels.com/photos/2599244/pexels-photo-2599244.jpeg",
+    "author_id": "a1",
+    "read_time": 5,
+    "likes": 93,
+    "comments": [],
+    "published": true,
+    "created_at": "2026-06-29T17:34:18.241062+00:00",
+    "updated_at": "2026-07-02T17:34:18.241058+00:00"
+  },
+  {
+    "id": "cc09be5e-507d-47db-b3dc-0b63e6858cc1",
+    "slug": "interfaces-after-the-chatbox",
+    "title": "Interfaces After the Chatbox",
+    "excerpt": "The text prompt was a rest stop. The real interface is being built now, and it doesn't look like a conversation.",
+    "content": "The chatbox was never the destination. It was scaffolding \u2014 the fastest way to expose a new capability to a world that hadn't yet decided what to do with it.\n\nNow the world is deciding. And it turns out, people do not want to talk to their software. They want their software to disappear.\n\n## Ambient intent\n\nThe next generation of tools reads what you are already doing and offers help without being asked. Not a suggestion. Not a modal. Just the right button, appearing where your cursor already was.\n\nThis is harder than it sounds. It requires the software to be right almost every time, because the cost of a wrong suggestion in your peripheral vision is much higher than the cost of a wrong answer in a chat window.\n\n## The end of prompts\n\nPrompts are a symptom of a mismatch. When the interface understands what you want, you do not need to describe it. You just do it, and the software follows.\n\nExpect to see prompts retreat into the background \u2014 becoming the language between systems, not between humans and systems.\n\n## What replaces the chat\n\nThree patterns are emerging. Inline actions, where the interface offers concrete next steps at the point of decision. Ambient annotation, where the software marks up your work with insights you did not ask for. And silent execution, where the software does the boring parts and asks only when it cannot decide.\n\nNone of these look like chat. All of them feel like magic.",
+    "category": "Tech",
+    "tags": [
+      "ux",
+      "ai",
+      "design"
+    ],
+    "cover_image": "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg",
+    "author_id": "a1",
+    "read_time": 7,
+    "likes": 110,
+    "comments": [],
+    "published": true,
+    "created_at": "2026-06-28T17:34:18.241701+00:00",
+    "updated_at": "2026-07-02T17:34:18.241693+00:00"
+  },
+  {
+    "id": "99d27cd1-b3d9-4be0-aee4-33720e15f990",
+    "slug": "open-weights-closed-cultures",
+    "title": "Open Weights, Closed Cultures",
+    "excerpt": "The models are open. The mindsets aren't. A tour of the strange politics of open-source AI.",
+    "content": "The weights are on the internet. Anyone can download them. In a technical sense, the models are free.\n\nAnd yet the culture around them is more fractured, more suspicious, and more tribal than any open-source community I have watched in twenty years.\n\n## The paradox\n\nOpen weights should be a great equalizer. Instead, they have created a new hierarchy \u2014 one based on who can afford the GPUs to fine-tune them, who has the data to specialize them, and who has the audience to distribute them.\n\nA weight file is not a product. It is a raw material. And raw materials favor whoever already owns the factory.\n\n## What openness actually enables\n\nThe honest case for open weights is not that they democratize AI. It is that they make AI legible. When the weights are open, researchers can probe them. Auditors can inspect them. Attackers can study them.\n\nThat legibility is worth defending. Not because it produces more equal outcomes, but because it produces more accountable systems.\n\n## The next fight\n\nThe open-weights debate is about to move from 'should the weights be public' to 'should the training data be public'. This is a much harder question, because the data is where the values live.\n\nOpen weights without open data is a peace treaty everyone can sign. Open data is a war.",
+    "category": "AI",
+    "tags": [
+      "open-source",
+      "policy",
+      "research"
+    ],
+    "cover_image": "https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg",
+    "author_id": "a1",
+    "read_time": 8,
+    "likes": 127,
+    "comments": [],
+    "published": true,
+    "created_at": "2026-06-27T17:34:18.242305+00:00",
+    "updated_at": "2026-07-02T17:34:18.242301+00:00"
+  }
+]

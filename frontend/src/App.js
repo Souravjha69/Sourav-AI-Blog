@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-route
 import { useEffect } from "react";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { AuthProvider, useAuth } from "@/context/AuthContext";
+import { IS_STATIC_SITE } from "@/lib/config";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/Navbar";
 import Home from "@/pages/Home";
@@ -45,13 +46,15 @@ function App() {
                 <Route path="/blog/:slug" element={<BlogDetail />} />
                 <Route path="/authors" element={<AuthorsList />} />
                 <Route path="/author/:id" element={<AuthorPage />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
-                  <Route index element={<AdminDashboard />} />
-                  <Route path="blogs" element={<AdminBlogs />} />
-                  <Route path="blogs/new" element={<AdminBlogEditor />} />
-                  <Route path="blogs/edit/:id" element={<AdminBlogEditor />} />
-                </Route>
+                {!IS_STATIC_SITE && <Route path="/login" element={<Login />} />}
+                {!IS_STATIC_SITE && (
+                  <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
+                    <Route index element={<AdminDashboard />} />
+                    <Route path="blogs" element={<AdminBlogs />} />
+                    <Route path="blogs/new" element={<AdminBlogEditor />} />
+                    <Route path="blogs/edit/:id" element={<AdminBlogEditor />} />
+                  </Route>
+                )}
               </Routes>
             </div>
             <Toaster theme="system" position="bottom-right" />

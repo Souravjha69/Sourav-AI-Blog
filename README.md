@@ -96,16 +96,25 @@ The app runs at `http://localhost:3000`, the API at `http://localhost:8000`.
 
 ## ☁️ Deployment
 
-This is a two-service app, so it needs two separate deploys:
+The deployed site is a **static, frontend-only** build on Vercel — there is no live backend or database in production, and the admin CMS is only reachable locally.
 
-| Component | Recommended host | Notes |
+| Component | Where it runs | Notes |
 |---|---|---|
-| **Frontend** | [Vercel](https://vercel.com) | Set root directory to `frontend`. Add env var `REACT_APP_BACKEND_URL` pointing at your deployed backend. A `vercel.json` is included for client-side routing. |
-| **Backend** | [Render](https://render.com) / [Railway](https://railway.app) | Vercel's serverless model doesn't fit a persistent FastAPI + MongoDB service — use a host that runs a long-lived Python process. |
-| **Database** | [MongoDB Atlas](https://www.mongodb.com/atlas) | Free tier works fine — just make sure it's reachable from your backend host. |
+| **Frontend** | [Vercel](https://vercel.com) | Set root directory to `frontend`. No `REACT_APP_BACKEND_URL` needed in production. |
+| **Backend + MongoDB** | Local machine only | Used to write/edit posts through the admin CMS (`/login`, `/admin`). Never deployed. |
 
-**Backend environment variables to set on your host:**
-`MONGO_URL`, `DB_NAME`, `JWT_SECRET`, `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `CORS_ORIGINS` (your Vercel domain)
+In a production build (`yarn build`, which is what Vercel runs — `NODE_ENV=production`), the app reads a static JSON snapshot (`frontend/src/data/*.json`) instead of calling a live API, and the `/login` and `/admin` routes, the like button, comments, and the newsletter form are all disabled/hidden (see `frontend/src/lib/config.js`). Running `yarn start` locally still uses the live backend and full admin CMS as before.
+
+### Publishing a new or edited post
+
+1. Run the backend + frontend locally as described above, and write/edit posts through `/admin`.
+2. Export the current published posts to static JSON:
+   ```bash
+   cd backend && source venv/bin/activate
+   python scripts/export_static_data.py
+   ```
+   This overwrites `frontend/src/data/blogs.json`, `authors.json`, and `categories.json`.
+3. Commit and push those files. Vercel rebuilds the frontend with the new snapshot baked in.
 
 <br/>
 

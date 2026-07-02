@@ -2,7 +2,7 @@ import { useEffect, useState, Suspense } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowDown, Search, PenLine, ShieldCheck, Sparkles, Send, Heart, Flame } from "lucide-react";
-import { api } from "@/lib/api";
+import { getBlogs, getAuthors, getCategories } from "@/lib/staticData";
 import { BlogCard } from "@/components/BlogCard";
 import HeroScene from "@/components/HeroScene";
 import Footer from "@/components/Footer";
@@ -26,9 +26,9 @@ export default function Home() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    api.get("/blogs?limit=24").then(({ data }) => setBlogs(data));
-    api.get("/authors").then(({ data }) => setAuthors(data));
-    api.get("/categories").then(({ data }) => setCategories(data));
+    setBlogs(getBlogs({ limit: 24 }));
+    setAuthors(getAuthors());
+    setCategories(getCategories());
   }, []);
 
   const featured = blogs.slice(0, 3);

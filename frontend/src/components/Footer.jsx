@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { ArrowUpRight, Github, Linkedin, Globe } from "lucide-react";
 import { api, formatApiError } from "@/lib/api";
+import { IS_STATIC_SITE } from "@/lib/config";
 import { toast } from "sonner";
 import { Reveal } from "@/components/Reveal";
 import Logo from "@/components/Logo";
@@ -19,6 +20,10 @@ export default function Footer() {
   const submit = async (e) => {
     e.preventDefault();
     if (!email) return;
+    if (IS_STATIC_SITE) {
+      toast.info("Newsletter signups aren't available on this static preview.");
+      return;
+    }
     setBusy(true);
     try {
       await api.post("/newsletter", { email });
@@ -77,7 +82,7 @@ export default function Footer() {
               <div className="text-xs font-medium uppercase tracking-[0.2em] opacity-60 mb-4">About</div>
               <ul className="space-y-3 text-sm">
                 <li><Link to="/authors" className="hover-line opacity-90 hover:opacity-100">Writers</Link></li>
-                <li><Link to="/login" className="hover-line opacity-90 hover:opacity-100">Admin</Link></li>
+                {!IS_STATIC_SITE && <li><Link to="/login" className="hover-line opacity-90 hover:opacity-100">Admin</Link></li>}
               </ul>
             </div>
           </div>

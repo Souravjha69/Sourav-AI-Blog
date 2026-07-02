@@ -1,13 +1,19 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { api } from "@/lib/api";
+import { IS_STATIC_SITE } from "@/lib/config";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!IS_STATIC_SITE);
 
   useEffect(() => {
+    if (IS_STATIC_SITE) {
+      // No live backend in production — there's nothing to authenticate against.
+      setUser(false);
+      return;
+    }
     (async () => {
       try {
         const { data } = await api.get("/auth/me");

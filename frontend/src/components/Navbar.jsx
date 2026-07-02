@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Sun, Moon, ArrowUpRight, Menu, X } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
+import { IS_STATIC_SITE } from "@/lib/config";
 import Logo from "@/components/Logo";
 
 const LINKS = [
@@ -69,13 +70,15 @@ export default function Navbar() {
           >
             {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
           </button>
-          <Link
-            to="/login"
-            data-testid="nav-login"
-            className="btn-pill hidden md:flex items-center gap-1 bg-[var(--text)] text-[var(--bg)] px-5 h-9 text-sm font-medium hover:opacity-85 transition-opacity"
-          >
-            Admin <ArrowUpRight size={14} />
-          </Link>
+          {!IS_STATIC_SITE && (
+            <Link
+              to="/login"
+              data-testid="nav-login"
+              className="btn-pill hidden md:flex items-center gap-1 bg-[var(--text)] text-[var(--bg)] px-5 h-9 text-sm font-medium hover:opacity-85 transition-opacity"
+            >
+              Admin <ArrowUpRight size={14} />
+            </Link>
+          )}
           <button
             className="md:hidden w-9 h-9 rounded-full flex items-center justify-center border border-[var(--border)]"
             onClick={() => setOpen((o) => !o)}
@@ -97,9 +100,11 @@ export default function Navbar() {
               {l.label}
             </Link>
           ))}
-          <Link to="/login" data-testid="nav-login-mobile" className="mt-2 px-3 py-3 rounded-2xl text-sm font-medium bg-[var(--text)] text-[var(--bg)] text-center">
-            Admin
-          </Link>
+          {!IS_STATIC_SITE && (
+            <Link to="/login" data-testid="nav-login-mobile" className="mt-2 px-3 py-3 rounded-2xl text-sm font-medium bg-[var(--text)] text-[var(--bg)] text-center">
+              Admin
+            </Link>
+          )}
         </motion.div>
       )}
     </motion.nav>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Github, Linkedin, Globe, Twitter } from "lucide-react";
-import { api } from "@/lib/api";
+import { getAuthorById } from "@/lib/staticData";
 import { BlogCard } from "@/components/BlogCard";
 import Footer from "@/components/Footer";
 import { Reveal } from "@/components/Reveal";
@@ -12,7 +12,7 @@ export default function AuthorPage() {
   const { id } = useParams();
   const [data, setData] = useState(null);
 
-  useEffect(() => { api.get(`/authors/${id}`).then(({ data }) => setData(data)).catch(() => {}); }, [id]);
+  useEffect(() => { setData(getAuthorById(id)); }, [id]);
 
   if (!data) return <div className="min-h-screen flex items-center justify-center text-sm text-[var(--text-sec)]">Loading…</div>;
   const { author, blogs } = data;

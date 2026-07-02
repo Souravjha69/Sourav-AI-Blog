@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Search, X } from "lucide-react";
 import { motion } from "framer-motion";
-import { api } from "@/lib/api";
+import { getBlogs } from "@/lib/staticData";
 import { BlogCard } from "@/components/BlogCard";
 import Footer from "@/components/Footer";
 import { Reveal } from "@/components/Reveal";
@@ -17,13 +17,9 @@ export default function BlogList() {
   const [q, setQ] = useState(searchParams.get("search") || "");
   const category = searchParams.get("category") || "All";
 
-  const fetchBlogs = useCallback(async () => {
+  const fetchBlogs = useCallback(() => {
     setLoading(true);
-    const params = new URLSearchParams();
-    if (category !== "All") params.set("category", category);
-    if (q) params.set("search", q);
-    const { data } = await api.get(`/blogs?${params.toString()}`);
-    setBlogs(data);
+    setBlogs(getBlogs({ category, search: q }));
     setLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category]);

@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Heart, MessageCircle, ArrowLeft, Share2 } from "lucide-react";
+import { getBlogBySlug } from "@/lib/staticData";
+import { IS_STATIC_SITE } from "@/lib/config";
 import { api, formatApiError } from "@/lib/api";
 import { toast } from "sonner";
 import { BlogCard } from "@/components/BlogCard";
@@ -22,14 +24,9 @@ export default function BlogDetail() {
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
 
   useEffect(() => {
-    (async () => {
-      try {
-        const { data } = await api.get(`/blogs/${slug}`);
-        setBlog(data);
-      } catch (e) {
-        toast.error("Article not found");
-      }
-    })();
+    const found = getBlogBySlug(slug);
+    if (found) setBlog(found);
+    else toast.error("Article not found");
   }, [slug]);
 
   useEffect(() => {
@@ -43,6 +40,10 @@ export default function BlogDetail() {
 
   const like = async () => {
     if (liked) return;
+    if (IS_STATIC_SITE) {
+      toast.info("Likes are read-only on this static preview.");
+      return;
+    }
     setLiked(true);
     try {
       const { data } = await api.post(`/blogs/${slug}/like`);
@@ -55,6 +56,10 @@ export default function BlogDetail() {
   const submitComment = async (e) => {
     e.preventDefault();
     if (!comment.name || !comment.content) return;
+    if (IS_STATIC_SITE) {
+      toast.info("Comments are read-only on this static preview.");
+      return;
+    }
     setPosting(true);
     try {
       const { data } = await api.post(`/blogs/${slug}/comments`, comment);

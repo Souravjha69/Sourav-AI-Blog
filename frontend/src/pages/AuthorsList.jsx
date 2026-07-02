@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { api } from "@/lib/api";
+import { getAuthors } from "@/lib/staticData";
 import Footer from "@/components/Footer";
 import { Reveal } from "@/components/Reveal";
 import SplitHeading from "@/components/SplitHeading";
 
 export default function AuthorsList() {
   const [authors, setAuthors] = useState([]);
-  useEffect(() => { api.get("/authors").then(({ data }) => setAuthors(data)); }, []);
+  useEffect(() => { setAuthors(getAuthors()); }, []);
 
   return (
     <>
